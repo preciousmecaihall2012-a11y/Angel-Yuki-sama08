@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Yuki Archive — a dreamy, customizable home for fanfiction and original stories.">
+<title>Yuki Archive ♡</title><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="lace" aria-hidden="true">✿ ୨୧ ✿ ୨୧ ✿ ୨୧ ✿ ୨୧ ✿ ୨୧ ✿</div>
+  <a class="brand" href="#" data-view="home">Yuki Archive</a>
+  <p class="tagline">a little world for the stories we love ♡</p>
+  <div class="account-actions"><span id="user-label">Browsing as a guest</span><button id="google-login" class="button pale">Continue with Google</button><button id="logout" class="button pale hidden">Log out</button></div>
+</header>
+<nav class="nav">
+  <a href="#" data-view="home">Home</a><a href="#" data-view="browse">Browse works</a><a href="#" data-view="write">Post a story</a><a href="#" data-view="bookmarks">Bookmarks</a><a href="#" data-view="profile">My profile</a>
+  <span class="nav-fill"></span><button id="theme-open" class="link-button">♡ Skin studio</button>
+</nav>
+<div class="notice" id="setup-notice"><strong>Preview mode:</strong> You can browse, write sample works, comment, bookmark, and customize the theme in this browser. Google login and shared publishing need the free Supabase setup described in <code>README.md</code>.</div>
+<div class="layout">
+<aside class="sidebar">
+  <section class="side-box"><h3>✧ archive menu ✧</h3><a href="#" data-view="home">Dashboard</a><a href="#" data-view="browse">Explore works</a><a href="#" data-view="write">Post a work</a><a href="#" data-view="bookmarks">My bookmarks</a><a href="#" data-view="profile">My profile</a></section>
+  <section class="side-box little-note"><span>୨୧</span><p>somewhere between<br>the pages, we belong.</p><span>✿</span></section>
+  <section class="side-box"><h3>Browse by mood</h3><button class="tag-filter" data-tag="Romance">Romance</button><button class="tag-filter" data-tag="Angst">Angst</button><button class="tag-filter" data-tag="Fluff">Fluff</button><button class="tag-filter" data-tag="Hurt/Comfort">Hurt/Comfort</button><button class="tag-filter" data-tag="Original Character">Original Character</button></section>
+</aside>
+<main id="app" aria-live="polite"></main>
+</div>
+<footer>Made with ♡ at Yuki Archive · an independent fanfiction community concept</footer>
+
+<dialog id="theme-dialog" class="modal">
+  <form method="dialog"><button class="close" aria-label="Close">×</button></form>
+  <p class="eyebrow">make it yours</p><h2>Skin studio ୨୧</h2>
+  <p class="muted">Change the look of your archive. Your choices are saved in this browser.</p>
+  <label>Color palette<select id="palette"><option value="blue">Yuki blue</option><option value="rose">Dusty rose</option><option value="lavender">Lavender letter</option><option value="night">Midnight ink</option></select></label>
+  <label>Typography<select id="font"><option value="serif">Vintage serif</option><option value="sans">Soft sans-serif</option><option value="typewriter">Typewriter</option></select></label>
+  <label class="check"><input id="ribbons" type="checkbox" checked> Show ribbons and lace</label>
+  <button id="save-theme" class="button" type="button">Save my skin</button>
+</dialog>
+<dialog id="profile-studio" class="modal studio-modal">
+  <form method="dialog"><button class="close" aria-label="Close">×</button></form>
+  <p class="eyebrow">your profile, your universe</p><h2>Profile & decor studio ୨୧</h2>
+  <p class="muted small">Upload images or add a direct image URL. Images and code are saved in this browser only in demo mode.</p>
+  <div class="studio-preview" id="studio-preview"><div class="studio-preview-banner" id="preview-banner"></div><div class="studio-preview-avatar" id="preview-avatar">✿</div><div class="studio-preview-name" id="preview-name">your pen name ♡</div><div class="studio-preview-stickers" id="preview-stickers">୨୧ ✧ ♡</div></div>
+  <label>Display name<input id="profile-name" maxlength="60" placeholder="your pen name"></label>
+  <label>About you<textarea id="profile-bio" rows="3" maxlength="500" placeholder="Tell readers about your favorite ships, fandoms, or stories…"></textarea></label>
+  <div class="studio-two-col"><label>Profile picture<input id="avatar-upload" type="file" accept="image/*"></label><label>Banner photo<input id="banner-upload" type="file" accept="image/*"></label></div>
+  <div class="studio-two-col"><label>Or avatar image URL<input id="avatar-url" type="url" placeholder="https://…"></label><label>Or banner image URL<input id="banner-url" type="url" placeholder="https://…"></label></div>
+  <label>Decorate with stickers<select id="profile-stickers"><option value="ribbons">Ribbons & bows ୨୧</option><option value="stars">Stars & sparkles ✧</option><option value="hearts">Hearts & love ♡</option><option value="flowers">Flowers ✿</option><option value="minimal">Minimal / none</option></select></label>
+  <label>Website background photo<input id="background-upload" type="file" accept="image/*"></label>
+  <label>Or background image URL<input id="background-url" type="url" placeholder="https://…"></label>
+  <label>Custom CSS (optional)<textarea id="custom-css" rows="5" spellcheck="false" placeholder="/* Example: */
+.hero { border-radius: 18px; }
+.brand { letter-spacing: .04em; }"></textarea></label>
+  <p class="muted small">Custom CSS changes the look of this browser preview. Avoid pasting code you don't trust. HTML and scripts are not executed.</p>
+  <div class="form-actions"><button id="save-profile-studio" class="button" type="button">Save my universe ♡</button><button id="reset-profile-studio" class="mini-button" type="button">Reset decor</button></div>
+</dialog>
+<dialog id="auth-dialog" class="modal">
+  <form method="dialog"><button class="close" aria-label="Close">×</button></form>
+  <p class="eyebrow">welcome home</p><h2>Sign in to Yuki ♡</h2>
+  <p>Use Google sign-in to publish and manage stories under your account. This requires the setup in README.md; the demo never asks for or stores your Google password.</p>
+  <button id="google-login-modal" class="button google-button" type="button"><span class="google-g">G</span> Continue with Google</button>
+  <button id="guest-mode" class="button guest-button" type="button">Continue as guest ♡</button>
+  <p class="muted small">Guest authors can publish, but guest works cannot be edited later. Guest access is temporary and isn't an account. Demo posts are stored only in this browser.</p>
+</dialog>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="app.js"></script>
+</body></html>
